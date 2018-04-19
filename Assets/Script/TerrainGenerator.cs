@@ -24,8 +24,8 @@ public class TerrainGenerator : MonoBehaviour
     public float sandHeight = 0.84f;
     public float grassHeight = 0.85f;
     public float rockHeight = 0.9f;
-    int xBlocks = 50;
-    int yBlocks = 50;
+    int xBlocks;
+    int yBlocks;
     public Texture2D territories;
 
     // Heightmap data
@@ -54,6 +54,8 @@ public class TerrainGenerator : MonoBehaviour
         rockTile.sprite = rock;
         // Generate terrain
         allegiance = territories.GetPixels();
+		xBlocks = territories.width;
+		yBlocks = territories.height;
         GenTerrain();
     }
 
