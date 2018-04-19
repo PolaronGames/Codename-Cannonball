@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6596865adab672a42a454085ac51b6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!1 &1063676614
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +303,11 @@ MonoBehaviour:
   water: {fileID: 21300000, guid: 4c6432f80aaad02408e25e35eb2a095b, type: 3}
   sand: {fileID: 21300000, guid: cd16166b38eeb1145a0446543d919a87, type: 3}
   grass: {fileID: 21300000, guid: e326ccd5294e7124e99c50b9169aaf73, type: 3}
+  rock: {fileID: 21300000, guid: ea5ec758380632242990359909e6da68, type: 3}
+  sandHeight: 0.85
+  grassHeight: 0.9
+  rockHeight: 0.95
+  territories: {fileID: 2800000, guid: 7f4bd945f86b02c4c953e2b05e338800, type: 3}
 --- !u!483693784 &1063676617
 TilemapRenderer:
   m_ObjectHideFlags: 0
