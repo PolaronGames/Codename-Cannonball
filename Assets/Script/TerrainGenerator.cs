@@ -8,7 +8,7 @@ public class TerrainGenerator : MonoBehaviour
 {
 
     // Tiles
-    Tilemap tilemap;
+    public Tilemap tilemap;
     Tile waterTile, sandTile, grassTile, rockTile;
     Vector3Int tilePosition;
     Sprite water, sand, grass, rock;
@@ -21,7 +21,7 @@ public class TerrainGenerator : MonoBehaviour
     float sandHeight;
     float grassHeight;
     float rockHeight;
-    int xBlocks, yBlocks;
+    public int xBlocks, yBlocks;
     public Texture2D territories;
 
     // Heightmap data

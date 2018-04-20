@@ -13,9 +13,10 @@ public class Player : MonoBehaviour
     Rigidbody2D Ship;
 
     // World data
-    Tilemap tilemap;
+    public Tilemap tilemap;
+    int n;
     WorldInfo info;
-    float dockingDistance;
+    int dockingDistance;
     float[,] heightmap;
     int detailLevel;
     int offset;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     float grassHeight;
     float rockHeight;
     float tileWidth;
+    public int xBlocks, yBlocks;
 
     // Tile types
     const int WATER = 0;
@@ -31,13 +33,16 @@ public class Player : MonoBehaviour
     const int ROCK = 3;
     const int EMPTY = -1;
 
+    // Menu
+    GameObject PortButton;
+
     // Use this for initialization
     void Start()
     {
         position = this.GetComponentsInParent<Transform>()[1];
         Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
         info = this.GetComponentsInParent<WorldInfo>()[0];
-        tileWidth = info.water.rect.width/100.0f;
+        tileWidth = info.water.rect.width / 100.0f;
         sandHeight = info.sandHeight;
         grassHeight = info.grassHeight;
         rockHeight = info.rockHeight;
@@ -45,8 +50,29 @@ public class Player : MonoBehaviour
         dockingDistance = info.dockingDistance;
         detailLevel = info.detailLevel;
         offset = (int)(Math.Pow(2, detailLevel) + 1) / 2;
-        tilemap = info.GetComponentsInChildren<Tilemap>()[0];
         heightmap = info.heightmap;
+        PortButton = GameObject.FindGameObjectWithTag("PortButton");
+        PortButton.SetActive(false);
+        n = (int)Math.Pow(2, detailLevel) + 1;
+    }
+
+    bool isDockable()
+    {
+        for (int j = 0; j < dockingDistance; j++)
+        {
+            int y = WorldToCell().y + j - dockingDistance / 2;
+            for (int i = 0; i < dockingDistance; i++)
+            {
+                int x = WorldToCell().x + i - dockingDistance / 2;
+                Vector3Int p = new Vector3Int(x, y, 0);
+                if (GetTileType(p) == SAND)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     Vector3Int WorldToCell()
@@ -56,21 +82,28 @@ public class Player : MonoBehaviour
         return new Vector3Int(x, y, 0);
     }
 
-    int GetTileType()
+    int GetTileType(Vector3Int p)
     {
-        Tile tile = (Tile)tilemap.GetTile(WorldToCell());
-        String name = tile.name;
-
-        switch (name)
+        Tile tile = (Tile)tilemap.GetTile(p);
+        if (tile == null)
         {
-            case "water":
-                return WATER;
-            case "sand":
-                return SAND;
-            case "grass":
-                return GRASS;
-            case "rock":
-                return ROCK;
+            return EMPTY;
+        }
+        else
+        {
+            String name = tile.name;
+
+            switch (name)
+            {
+                case "water":
+                    return WATER;
+                case "sand":
+                    return SAND;
+                case "grass":
+                    return GRASS;
+                case "rock":
+                    return ROCK;
+            }
         }
         return EMPTY;
     }
@@ -78,8 +111,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3Int TileIndex;
-        float elevation;
         Vector3 velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
         // Movement
@@ -101,18 +132,25 @@ public class Player : MonoBehaviour
         }
         Ship.velocity = velocity;
 
-        // Docking    
-        TileIndex = WorldToCell();
-        elevation = heightmap[TileIndex.x + offset, TileIndex.y + offset];
-        if (elevation >= 1.0f / dockingDistance)
-        {
-            Debug.Log("Port Menu Available");
-        }
+        // Docking  
+        PortButton.SetActive(isDockable());
 
-        // Collision
-        if(elevation >= sandHeight)
+        // Loop world map
+        if (position.position.x < -tileWidth * (float)n)
         {
-            //position.Translate(-step);
+            position.position = new Vector3(tileWidth * (float)(xBlocks - 1) * (float)n, position.position.y, 0.0f);
+        }
+        if (position.position.x > tileWidth * (float)(xBlocks) * (float)n)
+        {
+            position.position = new Vector3(0.0f, position.position.y, 0.0f);
+        }
+        if (position.position.y < -tileWidth * (float)n)
+        {
+            position.position = new Vector3(position.position.x, tileWidth * (float)(yBlocks - 1) * (float)n, 0.0f);
+        }
+        if (position.position.y > tileWidth * (float)(yBlocks) * (float)n)
+        {
+            position.position = new Vector3(position.position.x, 0.0f, 0.0f);
         }
     }
 }

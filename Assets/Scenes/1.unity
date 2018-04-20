@@ -527,8 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9151d45956b5d9f43b7bd560bd48afd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailLevel: 3
-  dockingDistance: 10
+  detailLevel: 6
+  dockingDistance: 30
   sandHeight: 0.7
   grassHeight: 0.8
   rockHeight: 0.9
@@ -846,6 +846,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
+  tilemap: {fileID: 0}
+  xBlocks: 0
+  yBlocks: 0
 --- !u!1 &829029578
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +987,7 @@ GameObject:
   - component: {fileID: 1029720798}
   m_Layer: 0
   m_Name: islandMenuToggleBtn
-  m_TagString: Untagged
+  m_TagString: PortButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1428,7 +1431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4433fac2a3a584a95d006bf52b4cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
   detailLevel: 0
+  xBlocks: 0
+  yBlocks: 0
   territories: {fileID: 2800000, guid: 7f4bd945f86b02c4c953e2b05e338800, type: 3}
 --- !u!483693784 &1369178393
 TilemapRenderer:
@@ -1746,7 +1752,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652537358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6395726, y: 3.1242325, z: -50}
+  m_LocalPosition: {x: 50, y: 50, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1477323165}
