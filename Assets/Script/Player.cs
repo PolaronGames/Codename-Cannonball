@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     // Player data
     Transform position;
     public float speed;
+    Rigidbody2D Ship;
 
     // World data
     Tilemap tilemap;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         position = this.GetComponentsInParent<Transform>()[1];
+        Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
         info = this.GetComponentsInParent<WorldInfo>()[0];
         tileWidth = info.water.rect.width/100.0f;
         sandHeight = info.sandHeight;
@@ -78,26 +80,26 @@ public class Player : MonoBehaviour
     {
         Vector3Int TileIndex;
         float elevation;
-        Vector3 step = new Vector3(0.0f, 0.0f, 0.0f);
+        Vector3 velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
         // Movement
         if (Input.GetKey("right"))
         {
-            step += new Vector3(0.1f * speed, 0.0f, 0.0f);
+            velocity += new Vector3(speed, 0.0f, 0.0f);
         }
         if (Input.GetKey("left"))
         {
-            step += new Vector3(-0.1f * speed, 0.0f, 0.0f);
+            velocity += new Vector3(-speed, 0.0f, 0.0f);
         }
         if (Input.GetKey("up"))
         {
-            step += new Vector3(0.0f, 0.1f * speed, 0.0f);
+            velocity += new Vector3(0.0f, speed, 0.0f);
         }
         if (Input.GetKey("down"))
         {
-            step += new Vector3(0.0f, -0.1f * speed, 0.0f);
+            velocity += new Vector3(0.0f, -speed, 0.0f);
         }
-        position.Translate(step);
+        Ship.velocity = velocity;
 
         // Docking    
         TileIndex = WorldToCell();
@@ -110,7 +112,7 @@ public class Player : MonoBehaviour
         // Collision
         if(elevation >= sandHeight)
         {
-            position.Translate(-step);
+            //position.Translate(-step);
         }
     }
 }

@@ -96,7 +96,7 @@ public class TerrainGenerator : MonoBehaviour
                 }
                 else
                 {
-                    tilemap.SetTile(tilePosition + blockPosition, waterTile);
+                    //tilemap.SetTile(tilePosition + blockPosition, waterTile);
                     heightmap[tilePosition.x + blockPosition.x + n/2, tilePosition.y + blockPosition.y + n/2] = block[j,i];
                 }
             }
