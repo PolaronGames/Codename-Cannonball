@@ -12,12 +12,13 @@ public class Player : MonoBehaviour
     public float speed;
 
     // World data
-    public GameObject world;
-    public Tilemap tilemap;
+    Tilemap tilemap;
+    WorldInfo info;
     float[,] heightmap;
-    static int detailLevel = 3;
-    int offset = (int)(Math.Pow(2, detailLevel) + 1)/2;
+    int detailLevel;
+    int offset;
 
+    // Tile types
     const int WATER = 0;
     const int SAND = 1;
     const int GRASS = 2;
@@ -28,12 +29,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         position = this.GetComponentsInParent<Transform>()[1];
-        world.SetActive(false);
-        world = Instantiate(world);
-		world.GetComponentsInChildren<TerrainGenerator>()[0].detailLevel = detailLevel;
-        tilemap = world.GetComponentsInChildren<Tilemap>()[0];
-        world.SetActive(true);
-        heightmap = world.GetComponentsInChildren<TerrainGenerator>()[0].heightmap;
+        info = this.GetComponentsInParent<WorldInfo>()[0];
+        detailLevel = info.detailLevel;
+        offset = (int)(Math.Pow(2, detailLevel) + 1)/2;
+        tilemap = info.GetComponentsInChildren<Tilemap>()[0];
+        heightmap = info.heightmap;
     }
 
     Vector3Int WorldToCell()

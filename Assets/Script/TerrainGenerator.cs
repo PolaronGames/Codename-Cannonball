@@ -13,6 +13,9 @@ public class TerrainGenerator : MonoBehaviour
     Vector3Int tilePosition;
     public Sprite water, sand, grass, rock;
 
+    // World info
+    WorldInfo info;
+
     // Terrain Parameters
     public int detailLevel;
     public float sandHeight = 0.84f;
@@ -32,10 +35,11 @@ public class TerrainGenerator : MonoBehaviour
     Color solus = new Color(0.0f, 0.0f, 0.0f, 1.0f);
     Color empty = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
-    // Use this for initialization
     void Awake()
     {
         // Initialize variables
+        info = this.GetComponentsInParent<WorldInfo>()[0];
+        detailLevel = info.detailLevel;
         n = (int)Math.Pow(2, detailLevel) + 1;
         random = new System.Random();
         tilemap = this.GetComponents<Tilemap>()[0];
