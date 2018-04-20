@@ -418,7 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1c70e5aa3c97b4b887290954a40f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailLevel: 3
 --- !u!4 &349155387
 Transform:
   m_ObjectHideFlags: 0
@@ -445,7 +444,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9151d45956b5d9f43b7bd560bd48afd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detailLevel: 3
+  detailLevel: 6
+  dockingDistance: 10
+  sandHeight: 0.7
+  grassHeight: 0.8
+  rockHeight: 0.9
+  water: {fileID: 21300000, guid: 4c6432f80aaad02408e25e35eb2a095b, type: 3}
+  sand: {fileID: 21300000, guid: cd16166b38eeb1145a0446543d919a87, type: 3}
+  grass: {fileID: 21300000, guid: e326ccd5294e7124e99c50b9169aaf73, type: 3}
+  rock: {fileID: 21300000, guid: ea5ec758380632242990359909e6da68, type: 3}
 --- !u!1 &354338299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,14 +1137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4433fac2a3a584a95d006bf52b4cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: {fileID: 21300000, guid: 4c6432f80aaad02408e25e35eb2a095b, type: 3}
-  sand: {fileID: 21300000, guid: cd16166b38eeb1145a0446543d919a87, type: 3}
-  grass: {fileID: 21300000, guid: e326ccd5294e7124e99c50b9169aaf73, type: 3}
-  rock: {fileID: 21300000, guid: ea5ec758380632242990359909e6da68, type: 3}
   detailLevel: 0
-  sandHeight: 0.8
-  grassHeight: 0.85
-  rockHeight: 0.9
   territories: {fileID: 2800000, guid: 7f4bd945f86b02c4c953e2b05e338800, type: 3}
 --- !u!483693784 &1369178393
 TilemapRenderer:

@@ -11,16 +11,16 @@ public class TerrainGenerator : MonoBehaviour
     Tilemap tilemap;
     Tile waterTile, sandTile, grassTile, rockTile;
     Vector3Int tilePosition;
-    public Sprite water, sand, grass, rock;
+    Sprite water, sand, grass, rock;
 
     // World info
     WorldInfo info;
 
     // Terrain Parameters
     public int detailLevel;
-    public float sandHeight = 0.84f;
-    public float grassHeight = 0.85f;
-    public float rockHeight = 0.9f;
+    float sandHeight;
+    float grassHeight;
+    float rockHeight;
     int xBlocks, yBlocks;
     public Texture2D territories;
 
@@ -39,6 +39,13 @@ public class TerrainGenerator : MonoBehaviour
     {
         // Initialize variables
         info = this.GetComponentsInParent<WorldInfo>()[0];
+        water = info.water;
+        sand = info.sand;
+        grass = info.grass;
+        rock = info.rock;
+        sandHeight = info.sandHeight;
+        grassHeight = info.grassHeight;
+        rockHeight = info.rockHeight;
         detailLevel = info.detailLevel;
         n = (int)Math.Pow(2, detailLevel) + 1;
         random = new System.Random();
