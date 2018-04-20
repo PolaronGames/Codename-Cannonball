@@ -9,27 +9,21 @@ public class TerrainGenerator : MonoBehaviour
 
     // Tiles
     Tilemap tilemap;
-    Tile waterTile;
-    Tile sandTile;
-    Tile grassTile;
-    Tile rockTile;
+    Tile waterTile, sandTile, grassTile, rockTile;
     Vector3Int tilePosition;
-    public Sprite water;
-    public Sprite sand;
-    public Sprite grass;
-    public Sprite rock;
+    public Sprite water, sand, grass, rock;
 
     // Terrain Parameters
-    const int detailLevel = 6;
+    public int detailLevel;
     public float sandHeight = 0.84f;
     public float grassHeight = 0.85f;
     public float rockHeight = 0.9f;
-    int xBlocks;
-    int yBlocks;
+    int xBlocks, yBlocks;
     public Texture2D territories;
 
     // Heightmap data
-    static int n = (int)Math.Pow(2, detailLevel) + 1;
+    int n;
+    public float[,] heightmap;
     System.Random random;
     Color[] allegiance;
     Color pirate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
@@ -39,9 +33,10 @@ public class TerrainGenerator : MonoBehaviour
     Color empty = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         // Initialize variables
+        n = (int)Math.Pow(2, detailLevel) + 1;
         random = new System.Random();
         tilemap = this.GetComponents<Tilemap>()[0];
         waterTile = ScriptableObject.CreateInstance<Tile>();
@@ -52,10 +47,15 @@ public class TerrainGenerator : MonoBehaviour
         sandTile.sprite = sand;
         grassTile.sprite = grass;
         rockTile.sprite = rock;
+        waterTile.name = "water";
+        sandTile.name = "sand";
+        grassTile.name = "grass";
+        rockTile.name = "rock";
         // Generate terrain
         allegiance = territories.GetPixels();
 		xBlocks = territories.width;
 		yBlocks = territories.height;
+        heightmap = new float[n*xBlocks, n*yBlocks];
         GenTerrain();
     }
 
@@ -71,18 +71,22 @@ public class TerrainGenerator : MonoBehaviour
                 if (block[j, i] >= sandHeight && block[j, i] < grassHeight)
                 {
                     tilemap.SetTile(tilePosition + blockPosition, sandTile);
+                    heightmap[tilePosition.x + blockPosition.x + n/2, tilePosition.y + blockPosition.y + n/2] = block[j,i];
                 }
                 else if (block[j, i] >= grassHeight && block[j, i] < rockHeight)
                 {
                     tilemap.SetTile(tilePosition + blockPosition, grassTile);
+                    heightmap[tilePosition.x + blockPosition.x + n/2, tilePosition.y + blockPosition.y + n/2] = block[j,i];
                 }
                 else if (block[j, i] >= rockHeight)
                 {
                     tilemap.SetTile(tilePosition + blockPosition, rockTile);
+                    heightmap[tilePosition.x + blockPosition.x + n/2, tilePosition.y + blockPosition.y + n/2] = block[j,i];
                 }
                 else
                 {
                     tilemap.SetTile(tilePosition + blockPosition, waterTile);
+                    heightmap[tilePosition.x + blockPosition.x + n/2, tilePosition.y + blockPosition.y + n/2] = block[j,i];
                 }
             }
         }
