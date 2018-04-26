@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour {
 
 	InputField cannonballInputField;
-	GameObject inventory;
+	GameObject player;
 	PlayerInventory inventoryScript;
 
 	public void ConfirmPurchase(){
-		inventory = GameObject.FindGameObjectWithTag("inventory");
-		inventoryScript = inventory.GetComponent<PlayerInventory>();
+		player = GameObject.FindGameObjectWithTag("player");
+		inventoryScript = player.GetComponent<PlayerInventory>();
 		inventoryScript.buyCannonball(getCannonballPurchaseAmount());
 	}
 
