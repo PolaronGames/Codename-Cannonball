@@ -11,6 +11,7 @@ TagManager:
   - inventory
   - doubloonCount
   - PortButton
+  - Projectile
   layers:
   - Default
   - TransparentFX

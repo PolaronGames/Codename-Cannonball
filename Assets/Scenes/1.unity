@@ -802,6 +802,8 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   xBlocks: 0
   yBlocks: 0
+  projectilePrefab: {fileID: 1013738155262686, guid: a8bb2ff63caaa1946a68dd29024ecddc,
+    type: 2}
 --- !u!114 &578778281
 MonoBehaviour:
   m_ObjectHideFlags: 0

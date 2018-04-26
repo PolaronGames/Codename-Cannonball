@@ -169,22 +169,18 @@ public class Player : MonoBehaviour
         }
 
         // Fire Projectile
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            fireSideState = fireSide.LEFT;
+            Fire(fireSide.LEFT);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            fireSideState = fireSide.RIGHT;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Fire(fireSideState);
+            Fire(fireSide.RIGHT);
         }
         
     }
 
-    // FIRE
+    // FIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     void Fire(fireSide fireSide)
     {
         Vector2 offset = new Vector2(0.0f, 0.0f);
