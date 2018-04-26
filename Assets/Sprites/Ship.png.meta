@@ -1,14 +1,24 @@
 fileFormatVersion: 2
-guid: c5a05734d702f8c4f9a0c1949fe4352e
-timeCreated: 1523928253
+guid: d9415ac2b36034a4f97fb2348dbeeeb1
+timeCreated: 1524704139
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Ship_0
-    21300002: Ship_1
-    21300004: Ship_2
-    21300006: Ship_3
-    21300008: Ship_4
+    21300000: Ship_right0
+    21300002: Ship_right1
+    21300004: Ship_right2
+    21300006: Ship_right3
+    21300008: Ship_right4
+    21300010: Ship_up0
+    21300012: Ship_up1
+    21300014: Ship_up2
+    21300016: Ship_up3
+    21300018: Ship_up4
+    21300020: Ship_left0
+    21300022: Ship_left1
+    21300024: Ship_left2
+    21300026: Ship_left3
+    21300028: Ship_left4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -63,20 +73,20 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -86,11 +96,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ship_0
+      name: Ship_right0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 300
         width: 160
         height: 100
       alignment: 0
@@ -100,11 +110,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Ship_1
+      name: Ship_right1
       rect:
         serializedVersion: 2
         x: 160
-        y: 0
+        y: 300
         width: 160
         height: 100
       alignment: 0
@@ -114,11 +124,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Ship_2
+      name: Ship_right2
       rect:
         serializedVersion: 2
         x: 320
-        y: 0
+        y: 300
         width: 160
         height: 100
       alignment: 0
@@ -128,11 +138,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Ship_3
+      name: Ship_right3
       rect:
         serializedVersion: 2
         x: 480
-        y: 0
+        y: 300
         width: 160
         height: 100
       alignment: 0
@@ -142,11 +152,151 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Ship_4
+      name: Ship_right4
       rect:
         serializedVersion: 2
         x: 640
-        y: 0
+        y: 300
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_up0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_up1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 200
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_up2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 200
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_up3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 200
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_up4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 200
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_left0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_left1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 100
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_left2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 100
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_left3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 100
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ship_left4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 100
         width: 160
         height: 100
       alignment: 0
