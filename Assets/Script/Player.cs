@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     Transform position;
     public float speed;
     Rigidbody2D Ship;
+    Animator animator;
 
     // World data
     public Tilemap tilemap;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
         position = this.GetComponentsInParent<Transform>()[1];
         Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
         info = this.GetComponentsInParent<WorldInfo>()[0];
+        animator = GetComponent<Animator>();
         tileWidth = info.water.rect.width / 100.0f;
         sandHeight = info.sandHeight;
         grassHeight = info.grassHeight;
@@ -127,14 +129,17 @@ public class Player : MonoBehaviour
         if (Input.GetKey("right"))
         {
             velocity += new Vector3(speed, 0.0f, 0.0f);
+            animator.Play("Right");
         }
         if (Input.GetKey("left"))
         {
             velocity += new Vector3(-speed, 0.0f, 0.0f);
+            animator.Play("Left");
         }
         if (Input.GetKey("up"))
         {
             velocity += new Vector3(0.0f, speed, 0.0f);
+            animator.Play("Up");
         }
         if (Input.GetKey("down"))
         {
