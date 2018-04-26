@@ -36,6 +36,15 @@ public class Player : MonoBehaviour
     // Menu
     GameObject PortButton;
 
+    // Projectile Data
+    public GameObject projectilePrefab;
+
+    fireSide fireSideState;
+    enum fireSide {
+        LEFT,
+        RIGHT
+    };
+
     // Use this for initialization
     void Start()
     {
@@ -54,6 +63,7 @@ public class Player : MonoBehaviour
         PortButton = GameObject.FindGameObjectWithTag("PortButton");
         PortButton.SetActive(false);
         n = (int)Math.Pow(2, detailLevel) + 1;
+        fireSideState = fireSide.LEFT;
     }
 
     bool isDockable()
@@ -152,5 +162,48 @@ public class Player : MonoBehaviour
         {
             position.position = new Vector3(position.position.x, 0.0f, 0.0f);
         }
+
+        // Fire Projectile
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            fireSideState = fireSide.LEFT;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            fireSideState = fireSide.RIGHT;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire(fireSideState);
+        }
+        
+    }
+
+    // FIRE
+    void Fire(fireSide fireSide)
+    {
+        Vector2 offset = new Vector2(0.0f, 0.0f);
+        // Create the Projectile from the Bullet Prefab
+        var projectile = (GameObject)Instantiate(
+            projectilePrefab,
+            (Vector2)position.position + offset,
+            Quaternion.identity);
+
+        var projectileComponent = projectile.GetComponent<Rigidbody2D>();    
+
+        // Set Velocity
+        if (fireSide == fireSide.LEFT)
+        {
+            offset = new Vector2(0.0f, 0.5f);
+            projectileComponent.velocity = new Vector2(0.0f, 3.0f);
+        }
+        else if (fireSide == fireSide.RIGHT)
+        {
+            offset = new Vector2(0.0f, -0.25f);
+            projectileComponent.velocity = new Vector2(0.0f, -3.0f);
+        }
+
+        // Destroy the bullet after 2 seconds
+        Destroy(projectile, 2.0f);        
     }
 }
