@@ -12,6 +12,13 @@ public class Player : MonoBehaviour
     public float speed;
     Rigidbody2D Ship;
     Animator animator;
+    shipDirection shipDirectionState;
+    enum shipDirection{
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT
+    };
 
     // World data
     public Tilemap tilemap;

@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - islandMenu
-  - confirmPurchaseBtn
-  - cannonballPurchaseTextField
-  - player
-  - inventory
-  - doubloonCount
-  - PortButton
-  - Projectile
+  tags: []
   layers:
   - Default
   - TransparentFX
