@@ -8,12 +8,12 @@ public class Player : MonoBehaviour
 {
 
     // Player data
-    Transform position;
+    public Transform position;
     public float speed;
     Rigidbody2D Ship;
     Animator animator;
-    shipDirection shipDirectionState;
-    enum shipDirection{
+    public static shipDirection shipDirectionState;
+    public enum shipDirection{
         UP,
         DOWN,
         RIGHT,
@@ -44,17 +44,6 @@ public class Player : MonoBehaviour
     // Menu
     GameObject PortButton;
 
-    // Projectile Data
-    public GameObject projectilePrefab;
-
-    float cannonBallSpeed;
-
-    fireSide fireSideState;
-    enum fireSide {
-        LEFT,
-        RIGHT
-    };
-
     // Use this for initialization
     void Start()
     {
@@ -74,9 +63,7 @@ public class Player : MonoBehaviour
         PortButton = GameObject.FindGameObjectWithTag("PortButton");
         PortButton.SetActive(false);
         n = (int)Math.Pow(2, detailLevel) + 1;
-        fireSideState = fireSide.LEFT;
         shipDirectionState = shipDirection.RIGHT;
-        cannonBallSpeed = 6.0f;
     }
 
     bool isDockable()
@@ -182,80 +169,5 @@ public class Player : MonoBehaviour
         {
             position.position = new Vector3(position.position.x, 0.0f, 0.0f);
         }
-
-        // Fire Projectile
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Fire(fireSide.LEFT);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Fire(fireSide.RIGHT);
-        }
-        
-    }
-
-    // FIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-    void Fire(fireSide fireSide)
-    {
-        Vector2 offset = new Vector2(0.0f, 0.0f);
-        // Create the Projectile from the Bullet Prefab
-        var projectile = (GameObject)Instantiate(
-            projectilePrefab,
-            (Vector2)position.position + offset,
-            Quaternion.identity);
-
-        var projectileComponent = projectile.GetComponent<Rigidbody2D>();    
-
-        // Set Velocity
-        if (fireSide == fireSide.LEFT)
-        {
-            if (shipDirectionState == shipDirection.UP)
-            {
-                offset = new Vector2(-0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(-cannonBallSpeed, 0.0f);
-            }
-            else if (shipDirectionState == shipDirection.DOWN)
-            {
-                offset = new Vector2(-0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(-cannonBallSpeed, 0.0f);
-            }
-            else if (shipDirectionState == shipDirection.RIGHT)
-            {
-                offset = new Vector2(0.0f, 0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, cannonBallSpeed);
-            }
-            else if (shipDirectionState == shipDirection.LEFT)
-            {
-                offset = new Vector2(0.0f, -0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, -cannonBallSpeed);
-            }
-        }
-        else if (fireSide == fireSide.RIGHT)
-        {
-            if (shipDirectionState == shipDirection.UP)
-            {
-                offset = new Vector2(0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(cannonBallSpeed, 0.0f);
-            }
-            else if (shipDirectionState == shipDirection.DOWN)
-            {
-                offset = new Vector2(0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(cannonBallSpeed, 0.0f);
-            }
-            else if (shipDirectionState == shipDirection.RIGHT)
-            {
-                offset = new Vector2(0.0f, -0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, -cannonBallSpeed);
-            }
-            else if (shipDirectionState == shipDirection.LEFT)
-            {
-                offset = new Vector2(0.0f, 0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, cannonBallSpeed);
-            }
-        }
-
-        // Destroy the bullet after 2 seconds
-        Destroy(projectile, 2.0f);        
     }
 }

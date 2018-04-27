@@ -706,6 +706,7 @@ GameObject:
   - component: {fileID: 578778277}
   - component: {fileID: 578778280}
   - component: {fileID: 578778281}
+  - component: {fileID: 578778282}
   m_Layer: 0
   m_Name: Player
   m_TagString: player
@@ -798,12 +799,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6596865adab672a42a454085ac51b6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
   speed: 25
   tilemap: {fileID: 0}
   xBlocks: 0
   yBlocks: 0
-  projectilePrefab: {fileID: 1013738155262686, guid: a8bb2ff63caaa1946a68dd29024ecddc,
-    type: 2}
 --- !u!114 &578778281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,6 +819,21 @@ MonoBehaviour:
   pineapple: 0
   doubloons: 0
   doubloonTextObject: {fileID: 0}
+--- !u!114 &578778282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578778276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7464ceb7880943a4690a3eaeddd9aeb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1013738155262686, guid: a8bb2ff63caaa1946a68dd29024ecddc,
+    type: 2}
+  speed: 6
+  fireSideState: 0
 --- !u!1 &628838140
 GameObject:
   m_ObjectHideFlags: 0
