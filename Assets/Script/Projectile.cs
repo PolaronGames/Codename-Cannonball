@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class Projectile : MonoBehaviour
 {
     // Projectile Data
-    public GameObject projectilePrefab;
+    GameObject projectilePrefab;
     
     GameObject player;
 
@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
+        projectilePrefab = Resources.Load("Prefabs/CannonBall") as GameObject;
         player = GameObject.FindGameObjectWithTag("player");
         position = player.GetComponent<Transform>();
         fireSideState = fireSide.LEFT;
