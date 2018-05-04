@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50681842536857996}
   - component: {fileID: 58197155700968522}
   - component: {fileID: 212672571779922190}
+  - component: {fileID: 114602320434702748}
   m_Layer: 0
   m_Name: CannonBall
   m_TagString: Projectile
@@ -77,6 +78,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.06557274}
   serializedVersion: 2
   m_Radius: 0.56557274
+--- !u!114 &114602320434702748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013738155262686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1eb03e7cce78aa448bfd15e17bdc099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7.02
+  damage: 5
 --- !u!212 &212672571779922190
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -90,6 +104,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

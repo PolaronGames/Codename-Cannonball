@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     public float speed;
     Rigidbody2D Ship;
     Animator animator;
-    public static shipDirection shipDirectionState;
-    public enum shipDirection{
+    public static ShipDirection shipDirectionState;
+    public enum ShipDirection{
         UP,
         DOWN,
         RIGHT,
@@ -28,17 +28,29 @@ public class Player : MonoBehaviour
 
     // make this an enum
     // Tile types
-    const int WATER = 0;
-    const int SAND = 1;
-    const int GRASS = 2;
-    const int ROCK = 3;
-    const int EMPTY = -1;
+    enum TileType{
+        WATER,
+        SAND,
+        GRASS,
+        ROCK,
+        EMPTY
+    }
 
     // Menu
     GameObject PortButton;
 
+    // Weapon State
+    public static Weapons activeWeapon;
+
+    public string weaponSlotOneName;
+    public string weaponSlotTwoName;
+    public enum Weapons{
+        WEAPON_SLOT_ONE,
+        WEAPON_SLOT_TWO
+    }
+
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         transform = this.GetComponentsInParent<Transform>()[1];
         Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
@@ -48,7 +60,9 @@ public class Player : MonoBehaviour
         dockingDistance = info.dockingDistance;
         PortButton = GameObject.FindGameObjectWithTag("PortButton");
         PortButton.SetActive(false);
-        shipDirectionState = shipDirection.RIGHT;
+        shipDirectionState = ShipDirection.RIGHT;
+        activeWeapon = Weapons.WEAPON_SLOT_ONE;
+        weaponSlotOneName = "CannonBall";
     }
 
     bool isDockable()
@@ -60,7 +74,7 @@ public class Player : MonoBehaviour
             {
                 int x = WorldToCell().x + i - dockingDistance / 2;
                 Vector3Int p = new Vector3Int(x, y, 0);
-                if (GetTileType(p) == SAND)
+                if (GetTileType(p) == TileType.SAND)
                 {
                     return true;
                 }
@@ -77,12 +91,12 @@ public class Player : MonoBehaviour
         return new Vector3Int(x, y, 0);
     }
 
-    int GetTileType(Vector3Int p)
+    TileType GetTileType(Vector3Int p)
     {
         Tile tile = (Tile)tilemap.GetTile(p);
         if (tile == null)
         {
-            return EMPTY;
+            return TileType.EMPTY;
         }
         else
         {
@@ -91,16 +105,26 @@ public class Player : MonoBehaviour
             switch (name)
             {
                 case "water":
-                    return WATER;
+                    return TileType.WATER;
                 case "sand":
-                    return SAND;
+                    return TileType.SAND;
                 case "grass":
-                    return GRASS;
+                    return TileType.GRASS;
                 case "rock":
-                    return ROCK;
+                    return TileType.ROCK;
             }
         }
-        return EMPTY;
+        return TileType.EMPTY;
+    }
+
+    public void SetWeaponOneSlotFilePath(string projectileName)
+    {
+        weaponSlotOneName = projectileName;
+    }
+
+    public void SetWeaponTwoSlotFilePath(string projectileName)
+    {
+        weaponSlotTwoName = projectileName;
     }
 
     // Update is called once per frame
@@ -108,29 +132,38 @@ public class Player : MonoBehaviour
     {
         Vector3 velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            activeWeapon = Weapons.WEAPON_SLOT_ONE;
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            activeWeapon = Weapons.WEAPON_SLOT_TWO;
+        }
+
         // Movement
         if (Input.GetKey("right"))
         {
             velocity += new Vector3(speed, 0.0f, 0.0f);
             animator.Play("Right");
-            shipDirectionState = shipDirection.RIGHT;
+            shipDirectionState = ShipDirection.RIGHT;
         }
         if (Input.GetKey("left"))
         {
             velocity += new Vector3(-speed, 0.0f, 0.0f);
             animator.Play("Left");
-            shipDirectionState = shipDirection.LEFT;
+            shipDirectionState = ShipDirection.LEFT;
         }
         if (Input.GetKey("up"))
         {
             velocity += new Vector3(0.0f, speed, 0.0f);
             animator.Play("Up");
-            shipDirectionState = shipDirection.UP;
+            shipDirectionState = ShipDirection.UP;
         }
         if (Input.GetKey("down"))
         {
             velocity += new Vector3(0.0f, -speed, 0.0f);
-            shipDirectionState = shipDirection.DOWN;
+            shipDirectionState = ShipDirection.DOWN;
         }
         Ship.velocity = velocity;
 
