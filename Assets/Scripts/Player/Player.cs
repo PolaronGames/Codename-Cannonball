@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
 
     // Player data
-    public Transform position;
+    Transform transform;
     public float speed;
     Rigidbody2D Ship;
     Animator animator;
@@ -21,19 +21,12 @@ public class Player : MonoBehaviour
     };
 
     // World data
-    public Tilemap tilemap;
-    int n;
     WorldInfo info;
+    public Tilemap tilemap;
     int dockingDistance;
-    float[,] heightmap;
-    int detailLevel;
-    int offset;
-    float sandHeight;
-    float grassHeight;
-    float rockHeight;
     float tileWidth;
-    public int xBlocks, yBlocks;
 
+    // make this an enum
     // Tile types
     const int WATER = 0;
     const int SAND = 1;
@@ -47,22 +40,14 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        position = this.GetComponentsInParent<Transform>()[1];
+        transform = this.GetComponentsInParent<Transform>()[1];
         Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
         info = this.GetComponentsInParent<WorldInfo>()[0];
         animator = GetComponent<Animator>();
         tileWidth = info.water.rect.width / 100.0f;
-        sandHeight = info.sandHeight;
-        grassHeight = info.grassHeight;
-        rockHeight = info.rockHeight;
-        detailLevel = info.detailLevel;
         dockingDistance = info.dockingDistance;
-        detailLevel = info.detailLevel;
-        offset = (int)(Math.Pow(2, detailLevel) + 1) / 2;
-        heightmap = info.heightmap;
         PortButton = GameObject.FindGameObjectWithTag("PortButton");
         PortButton.SetActive(false);
-        n = (int)Math.Pow(2, detailLevel) + 1;
         shipDirectionState = shipDirection.RIGHT;
     }
 
@@ -87,8 +72,8 @@ public class Player : MonoBehaviour
 
     Vector3Int WorldToCell()
     {
-        int x = (int)(position.position.x / tileWidth) + 1;
-        int y = (int)(position.position.y / tileWidth) + 1;
+        int x = (int)(transform.position.x / tileWidth) + 1;
+        int y = (int)(transform.position.y / tileWidth) + 1;
         return new Vector3Int(x, y, 0);
     }
 
@@ -151,23 +136,5 @@ public class Player : MonoBehaviour
 
         // Docking  
         PortButton.SetActive(isDockable());
-
-        // Loop world map
-        if (position.position.x < -tileWidth * (float)n)
-        {
-            position.position = new Vector3(tileWidth * (float)(xBlocks - 1) * (float)n, position.position.y, 0.0f);
-        }
-        if (position.position.x > tileWidth * (float)(xBlocks) * (float)n)
-        {
-            position.position = new Vector3(0.0f, position.position.y, 0.0f);
-        }
-        if (position.position.y < -tileWidth * (float)n)
-        {
-            position.position = new Vector3(position.position.x, tileWidth * (float)(yBlocks - 1) * (float)n, 0.0f);
-        }
-        if (position.position.y > tileWidth * (float)(yBlocks) * (float)n)
-        {
-            position.position = new Vector3(position.position.x, 0.0f, 0.0f);
-        }
     }
 }
