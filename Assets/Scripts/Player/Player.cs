@@ -145,26 +145,28 @@ public class Player : MonoBehaviour
         if (Input.GetKey("right"))
         {
             velocity += new Vector3(speed, 0.0f, 0.0f);
-            animator.Play("Right");
+            animator.Play("ship_right_anim");
             shipDirectionState = ShipDirection.RIGHT;
         }
         if (Input.GetKey("left"))
         {
             velocity += new Vector3(-speed, 0.0f, 0.0f);
-            animator.Play("Left");
+            animator.Play("ship_left_anim");
             shipDirectionState = ShipDirection.LEFT;
         }
         if (Input.GetKey("up"))
         {
             velocity += new Vector3(0.0f, speed, 0.0f);
-            animator.Play("Up");
+            animator.Play("ship_up_anim");
             shipDirectionState = ShipDirection.UP;
         }
         if (Input.GetKey("down"))
         {
             velocity += new Vector3(0.0f, -speed, 0.0f);
+            animator.Play("ship_down_anim");
             shipDirectionState = ShipDirection.DOWN;
         }
+
         Ship.velocity = velocity;
 
         // Docking  
