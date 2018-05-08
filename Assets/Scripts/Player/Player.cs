@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         PortButton.SetActive(false);
         shipDirectionState = ShipDirection.RIGHT;
         activeWeapon = Weapons.WEAPON_SLOT_ONE;
-        weaponSlotOneName = "CannonBall";
+        weaponSlotOneName = "Cannon 1";
     }
 
     bool isDockable()
