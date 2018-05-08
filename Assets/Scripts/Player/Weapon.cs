@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         position = player.GetComponent<Transform>();
         fireSideState = fireSide.LEFT;
-        if (Player.activeWeapon == Player.Weapons.WEAPON_SLOT_ONE)
+        if (playerScript.activeWeapon == Player.Weapons.WEAPON_SLOT_ONE)
         {
             projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotOneName) as GameObject;
             speed = projectilePrefab.GetComponent<Projectile>().speed;
@@ -48,11 +48,11 @@ public class Weapon : MonoBehaviour
         // Fire Projectile
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Fire(fireSide.LEFT, Player.shipDirectionState);
+            Fire(fireSide.LEFT, playerScript.shipDirectionState);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            Fire(fireSide.RIGHT, Player.shipDirectionState);
+            Fire(fireSide.RIGHT, playerScript.shipDirectionState);
         }
     }
 
