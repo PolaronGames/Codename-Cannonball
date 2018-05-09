@@ -29,6 +29,11 @@ public class Weapon : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         position = player.GetComponent<Transform>();
         fireSideState = fireSide.LEFT;
+        SetActiveWeapon();
+    }
+
+    public void SetActiveWeapon()
+    {
         if (playerScript.activeWeapon == Player.Weapons.WEAPON_SLOT_ONE)
         {
             projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotOneName) as GameObject;
@@ -37,7 +42,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotOneName) as GameObject;
+            projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotTwoName) as GameObject;
             speed = projectilePrefab.GetComponent<Projectile>().speed;
             damage = projectilePrefab.GetComponent<Projectile>().damage;
         }
