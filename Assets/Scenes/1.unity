@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 538994892}
   - component: {fileID: 538994891}
   - component: {fileID: 538994890}
+  - component: {fileID: 538994893}
   m_Layer: 0
   m_Name: Cannon 2
   m_TagString: Untagged
@@ -399,7 +400,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1110980136}
+      - m_Target: {fileID: 538994893}
         m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
@@ -409,7 +410,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &538994891
@@ -447,6 +448,17 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 870177969}
   m_GameObject: {fileID: 538994888}
+--- !u!114 &538994893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538994888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9630056111db393478ddbb901bca7db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &578778276
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +681,7 @@ GameObject:
   - component: {fileID: 802828040}
   - component: {fileID: 802828039}
   - component: {fileID: 802828038}
+  - component: {fileID: 802828041}
   m_Layer: 0
   m_Name: Cannon 1
   m_TagString: Untagged
@@ -734,7 +747,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1110980136}
+      - m_Target: {fileID: 802828041}
         m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
@@ -744,7 +757,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &802828039
@@ -780,6 +793,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 802828036}
+--- !u!114 &802828041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 802828036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9630056111db393478ddbb901bca7db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &870177969
 Prefab:
   m_ObjectHideFlags: 0
@@ -886,7 +910,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1110980136}
+      objectReference: {fileID: 538994893}
     - target: {fileID: 114367413070948888, guid: 1c0502dee02ed2d4da9639cdb5e90f8a,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -896,6 +920,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114367413070948888, guid: 1c0502dee02ed2d4da9639cdb5e90f8a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
@@ -1110,7 +1139,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1110980134}
   - component: {fileID: 1110980135}
-  - component: {fileID: 1110980136}
   m_Layer: 0
   m_Name: _menumanager
   m_TagString: Untagged
@@ -1148,17 +1176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMenuOpen: 1
---- !u!114 &1110980136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1110980133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9630056111db393478ddbb901bca7db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1125215766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1287,7 @@ GameObject:
   - component: {fileID: 1331411083}
   - component: {fileID: 1331411085}
   - component: {fileID: 1331411084}
+  - component: {fileID: 1331411086}
   m_Layer: 0
   m_Name: IslandMenuPanel
   m_TagString: islandMenu
@@ -1334,6 +1352,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1331411082}
+--- !u!114 &1331411086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1331411082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1993d1b0f66e4464f884671a119e1c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlot: 0
 --- !u!1 &1331550421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,6 +1625,7 @@ GameObject:
   - component: {fileID: 1483315230}
   - component: {fileID: 1483315229}
   - component: {fileID: 1483315228}
+  - component: {fileID: 1483315231}
   m_Layer: 0
   m_Name: Cannon 3
   m_TagString: Untagged
@@ -1660,7 +1691,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1110980136}
+      - m_Target: {fileID: 1483315231}
         m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
@@ -1670,7 +1701,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1483315229
@@ -1706,6 +1737,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1483315226}
+--- !u!114 &1483315231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483315226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9630056111db393478ddbb901bca7db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1652181219
 GameObject:
   m_ObjectHideFlags: 0

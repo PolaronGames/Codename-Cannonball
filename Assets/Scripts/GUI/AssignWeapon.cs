@@ -8,16 +8,15 @@ public class AssignWeapon : MonoBehaviour {
 	public void onClick()
 	{
 		Player player = GameObject.FindGameObjectWithTag("player").GetComponent<Player>();
-		ExpandMenu menu = GameObject.FindGameObjectWithTag("islandMenu").GetComponent<ExpandMenu>();
+		Menu menu = GameObject.FindGameObjectWithTag("islandMenu").GetComponent<Menu>();
 		Text name = this.GetComponentInChildren<Text>();
-		player.weaponSlotOneName = name.text;
 
-		if (menu.weaponSlot == ExpandMenu.WeaponSlotToChange.WEAPON_SLOT_ONE)
+		if (menu.weaponSlot == Menu.WeaponSlotToChange.WEAPON_SLOT_ONE)
 		{
 			player.weaponSlotOneName = name.text;
 			// Highlight Selected Weapon
 		}
-		else if (menu.weaponSlot == ExpandMenu.WeaponSlotToChange.WEAPON_SLOT_TWO)
+		else if (menu.weaponSlot == Menu.WeaponSlotToChange.WEAPON_SLOT_TWO)
 		{
 			player.weaponSlotTwoName = name.text;
 			// Highlight Selected Weapon

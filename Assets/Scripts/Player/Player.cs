@@ -115,16 +115,6 @@ public class Player : MonoBehaviour
         return TileType.EMPTY;
     }
 
-    public void SetWeaponOneSlotFilePath(string projectileName)
-    {
-        weaponSlotOneName = projectileName;
-    }
-
-    public void SetWeaponTwoSlotFilePath(string projectileName)
-    {
-        weaponSlotTwoName = projectileName;
-    }
-
     // Update is called once per frame
     void Update()
     {
