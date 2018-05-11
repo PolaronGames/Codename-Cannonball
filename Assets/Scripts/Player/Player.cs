@@ -50,12 +50,12 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        tilemap = GameObject.FindGameObjectWithTag("World").GetComponentInChildren<Tilemap>();
         transform = this.GetComponentsInParent<Transform>()[1];
         Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
-        info = this.GetComponentsInParent<WorldInfo>()[0];
         animator = GetComponent<Animator>();
-        tileWidth = info.water.rect.width / 100.0f;
-        dockingDistance = info.dockingDistance;
+        tileWidth = 0.64f;
+        //dockingDistance = info.dockingDistance;
         PortButton = GameObject.FindGameObjectWithTag("PortButton");
         PortButton.SetActive(false);
         shipDirectionState = ShipDirection.RIGHT;
@@ -98,12 +98,10 @@ public class Player : MonoBehaviour
         }
         else
         {
-            String name = tile.name;
+            String name = tile.ToString();
 
             switch (name)
             {
-                case "water":
-                    return TileType.WATER;
                 case "sand":
                     return TileType.SAND;
                 case "grass":
@@ -240,5 +238,6 @@ public class Player : MonoBehaviour
         
         // Docking  
         PortButton.SetActive(isDockable());
+        Debug.Log(tilemap.GetTile(WorldToCell()).ToString());
     }
 }
