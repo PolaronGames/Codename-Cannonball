@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
 
     // Player data
-    Transform transform;
+    Transform PlayerTransform;
     public float speed;
     Rigidbody2D Ship;
     Animator animator;
@@ -18,12 +18,10 @@ public class Player : MonoBehaviour
     public ShipDirection shipDirectionState;
 
     // World data
-    WorldInfo info;
     public Tilemap tilemap;
     int dockingDistance;
     float tileWidth;
-
-    // make this an enum
+    
     // Tile types
     enum TileType{
         WATER,
@@ -51,11 +49,10 @@ public class Player : MonoBehaviour
     void Awake()
     {
         tilemap = GameObject.FindGameObjectWithTag("World").GetComponentInChildren<Tilemap>();
-        transform = this.GetComponentsInParent<Transform>()[1];
+        PlayerTransform = this.GetComponentsInParent<Transform>()[1]; // this is the "Player Camera" Transform
         Ship = this.GetComponentsInParent<Rigidbody2D>()[0];
         animator = GetComponent<Animator>();
-        tileWidth = 0.64f;
-        //dockingDistance = info.dockingDistance;
+        tileWidth = 0.125f;
         PortButton = GameObject.FindGameObjectWithTag("PortButton");
         PortButton.SetActive(false);
         shipDirectionState = ShipDirection.RIGHT;
@@ -84,8 +81,8 @@ public class Player : MonoBehaviour
 
     Vector3Int WorldToCell()
     {
-        int x = (int)(transform.position.x / tileWidth) + 1;
-        int y = (int)(transform.position.y / tileWidth) + 1;
+        int x = (int)(PlayerTransform.position.x / tileWidth) + 1;
+        int y = (int)(PlayerTransform.position.y / tileWidth) + 1;
         return new Vector3Int(x, y, 0);
     }
 
@@ -131,28 +128,30 @@ public class Player : MonoBehaviour
         // Movement
         if (Input.GetKey("right"))
         {
-            velocity += new Vector3(speed, 0.0f, 0.0f);
+            velocity += new Vector3(1.0f, 0.0f, 0.0f);
             x += 1;
             shipDirectionState = ShipDirection.RIGHT;
         }
         if (Input.GetKey("left"))
         {
-            velocity += new Vector3(-speed, 0.0f, 0.0f);
+            velocity += new Vector3(-1.0f, 0.0f, 0.0f);
             x -= 1;
             shipDirectionState = ShipDirection.LEFT;
         }
         if (Input.GetKey("up"))
         {
-            velocity += new Vector3(0.0f, speed, 0.0f);
+            velocity += new Vector3(0.0f, 1.0f, 0.0f);
             y += 1;
             shipDirectionState = ShipDirection.UP;
         }
         if (Input.GetKey("down"))
         {
-            velocity += new Vector3(0.0f, -speed, 0.0f);
+            velocity += new Vector3(0.0f, -1.0f, 0.0f);
             y -= 1;
             shipDirectionState = ShipDirection.DOWN;
         }
+        velocity.Normalize();
+        velocity*=speed;
         Ship.velocity = velocity;
 
         // animation
@@ -238,6 +237,5 @@ public class Player : MonoBehaviour
         
         // Docking  
         PortButton.SetActive(isDockable());
-        Debug.Log(tilemap.GetTile(WorldToCell()).ToString());
     }
 }
