@@ -17,7 +17,7 @@ public class Waves : MonoBehaviour {
 				float random = Random.Range(0.0f, 1.0f);
 				if(random < waveDensity)
 				{
-					Vector3 position = new Vector3(i, j, 0.0f);
+					Vector3 position = new Vector3(i, j, 20.0f);
 					Instantiate(wave, position, Quaternion.identity);
 				}
 			}
