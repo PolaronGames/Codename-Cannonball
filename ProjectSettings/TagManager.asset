@@ -8,6 +8,7 @@ TagManager:
   - PortButton
   - islandMenu
   - World
+  - Water
   layers:
   - Default
   - TransparentFX
