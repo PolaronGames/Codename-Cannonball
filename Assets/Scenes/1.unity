@@ -822,10 +822,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 578778276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6596865adab672a42a454085ac51b6a7, type: 3}
+  m_Script: {fileID: 11500000, guid: cb902b4a62212ac4aad34d4d8438eefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 25
+  Ship: {fileID: 0}
   shipDirectionState: 0
   tilemap: {fileID: 0}
   dockingDistance: 50
@@ -843,7 +844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4335cedf4151ab543817e09b8831eabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSideState: 0
 --- !u!114 &578778282
 MonoBehaviour:
   m_ObjectHideFlags: 0
