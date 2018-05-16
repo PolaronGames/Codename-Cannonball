@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   damage: 5
+  fireRate: 0.3
 --- !u!212 &212525443804801844
 SpriteRenderer:
   m_ObjectHideFlags: 1

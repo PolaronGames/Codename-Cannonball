@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     // Player data
     Transform PlayerTransform;
     public float speed;
-    Rigidbody2D Ship;
+    public Rigidbody2D Ship;
     Animator animator;
     public enum ShipDirection
     {

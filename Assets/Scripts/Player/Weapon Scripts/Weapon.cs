@@ -16,6 +16,11 @@ public class Weapon : MonoBehaviour
 
     float speed;
     float damage;
+    float projectileLifeSpan;
+
+    float fireRate;
+
+    float nextFire = 0.0f;
 
     public fireSide fireSideState;
     public enum fireSide {
@@ -39,24 +44,31 @@ public class Weapon : MonoBehaviour
             projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotOneName) as GameObject;
             speed = projectilePrefab.GetComponent<Projectile>().speed;
             damage = projectilePrefab.GetComponent<Projectile>().damage;
+            fireRate = projectilePrefab.GetComponent<Projectile>().fireRate;
+            projectileLifeSpan = projectilePrefab.GetComponent<Projectile>().lifeSpan;
         }
         else
         {
             projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotTwoName) as GameObject;
             speed = projectilePrefab.GetComponent<Projectile>().speed;
             damage = projectilePrefab.GetComponent<Projectile>().damage;
+            fireRate = projectilePrefab.GetComponent<Projectile>().fireRate;
+            projectileLifeSpan = projectilePrefab.GetComponent<Projectile>().lifeSpan;
         }
     }
 
     void Update()
     {
         // Fire Projectile
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
             Fire(fireSide.LEFT, playerScript.shipDirectionState);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+
+        if (Input.GetKey(KeyCode.D) && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
             Fire(fireSide.RIGHT, playerScript.shipDirectionState);
         }
     }
@@ -80,25 +92,49 @@ public class Weapon : MonoBehaviour
             if (shipDirectionState == Player.ShipDirection.UP)
             {
                 offset = new Vector2(-0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(-speed, angle);
+                projectileComponent.velocity = new Vector2(-speed, angle) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 1.0f;
             }
             else if (shipDirectionState == Player.ShipDirection.DOWN)
             {
                 offset = new Vector2(-0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(-speed, angle);
+                projectileComponent.velocity = new Vector2(-speed, angle) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 1.0f;
             }
             else if (shipDirectionState == Player.ShipDirection.RIGHT)
             {
                 offset = new Vector2(0.0f, 0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, speed);
+                projectileComponent.velocity = new Vector2(0.0f, speed) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 0.0f;
             }
             else if (shipDirectionState == Player.ShipDirection.LEFT)
             {
                 offset = new Vector2(0.0f, -0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, -speed);
+                projectileComponent.velocity = new Vector2(0.0f, -speed) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.DOWNLEFT)
+            {
+                offset = new Vector2(-0.125f, 0.125f);
+                projectileComponent.velocity = new Vector2(-speed/2, speed/2) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.DOWNRIGHT)
+            {
+                offset = new Vector2(-0.125f, -0.125f);
+                projectileComponent.velocity = new Vector2(-speed/2, -speed/2) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.UPLEFT)
+            {
+                offset = new Vector2(-0.125f, -0.125f);
+                projectileComponent.velocity = new Vector2(-speed/2, -speed/2) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.UPRIGHT)
+            {
+                offset = new Vector2(-0.125f, 0.125f);
+                projectileComponent.velocity = new Vector2(-speed/2, speed/2) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 0.0f;
             }
         }
@@ -107,30 +143,54 @@ public class Weapon : MonoBehaviour
             if (shipDirectionState == Player.ShipDirection.UP)
             {
                 offset = new Vector2(0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(speed, angle);
+                projectileComponent.velocity = new Vector2(speed, angle) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 1.0f;
             }
             else if (shipDirectionState == Player.ShipDirection.DOWN)
             {
                 offset = new Vector2(0.25f, 0.0f);
-                projectileComponent.velocity = new Vector2(speed, angle);
+                projectileComponent.velocity = new Vector2(speed, angle) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 1.0f;
             }
             else if (shipDirectionState == Player.ShipDirection.RIGHT)
             {
                 offset = new Vector2(0.0f, -0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, -speed);
+                projectileComponent.velocity = new Vector2(0.0f, -speed) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 0.0f;
             }
             else if (shipDirectionState == Player.ShipDirection.LEFT)
             {
                 offset = new Vector2(0.0f, 0.25f);
-                projectileComponent.velocity = new Vector2(0.0f, speed);
+                projectileComponent.velocity = new Vector2(0.0f, speed) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.DOWNLEFT)
+            {
+                offset = new Vector2(0.125f, 0.125f);
+                projectileComponent.velocity = new Vector2(speed/2, -speed/2) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.DOWNRIGHT)
+            {
+                offset = new Vector2(0.125f, -0.125f);
+                projectileComponent.velocity = new Vector2(speed/2, speed/2) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.UPLEFT)
+            {
+                offset = new Vector2(0.125f, 0.125f);
+                projectileComponent.velocity = new Vector2(speed/2, speed/2) + playerScript.Ship.velocity;
+                projectileComponent.gravityScale = 0.0f;
+            }
+            else if (shipDirectionState == Player.ShipDirection.UPRIGHT)
+            {
+                offset = new Vector2(0.125f, -0.125f);
+                projectileComponent.velocity = new Vector2(speed/2, -speed/2) + playerScript.Ship.velocity;
                 projectileComponent.gravityScale = 0.0f;
             }
         }
 
-        // Destroy the bullet after 2 seconds
-        Destroy(projectile, 1.0f);        
+        // Destroy the bullet based on projectile life span
+        Destroy(projectile, projectileLifeSpan);        
     }
 }
