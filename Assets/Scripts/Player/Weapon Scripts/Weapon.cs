@@ -4,15 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public enum WeaponSide
+{
+    LEFT,
+    RIGHT
+};
+
 public class Weapon : MonoBehaviour
 {
     // Projectile Data
     GameObject projectilePrefab;
-    
-    GameObject player;
-    Player playerScript;
 
-    Transform position;
+    GameObject player;
+    Movement playerData;
+
+    Transform playerTransform;
+
 
     float speed;
     float damage;
@@ -22,26 +29,21 @@ public class Weapon : MonoBehaviour
 
     float nextFire = 0.0f;
 
-    public fireSide fireSideState;
-    public enum fireSide {
-        LEFT,
-        RIGHT
-    };
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player");
-        playerScript = player.GetComponent<Player>();
-        position = player.GetComponent<Transform>();
-        fireSideState = fireSide.LEFT;
+        playerData = player.GetComponent<Movement>();
+        playerTransform = player.GetComponent<Transform>();
+        projectilePrefab = Resources.Load("Prefabs/" + playerData.weaponSlotOneName) as GameObject;
         SetActiveWeapon();
     }
 
     public void SetActiveWeapon()
     {
-        if (playerScript.activeWeapon == Player.Weapons.WEAPON_SLOT_ONE)
+        if (playerData.activeWeapon == Weapons.WEAPON_SLOT_ONE)
         {
-            projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotOneName) as GameObject;
+            projectilePrefab = Resources.Load("Prefabs/" + playerData.weaponSlotOneName) as GameObject;
             speed = projectilePrefab.GetComponent<Projectile>().speed;
             damage = projectilePrefab.GetComponent<Projectile>().damage;
             fireRate = projectilePrefab.GetComponent<Projectile>().fireRate;
@@ -49,7 +51,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            projectilePrefab = Resources.Load("Prefabs/" + playerScript.weaponSlotTwoName) as GameObject;
+            projectilePrefab = Resources.Load("Prefabs/" + playerData.weaponSlotTwoName) as GameObject;
             speed = projectilePrefab.GetComponent<Projectile>().speed;
             damage = projectilePrefab.GetComponent<Projectile>().damage;
             fireRate = projectilePrefab.GetComponent<Projectile>().fireRate;
@@ -60,21 +62,129 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         // Fire Projectile
-        if (Input.GetKey(KeyCode.A) && Time.time > nextFire)
+        if (Input.GetKey("A") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Fire(fireSide.LEFT, playerScript.shipDirectionState);
+            Fire(WeaponSide.LEFT, playerData.shipDirectionState);
         }
 
-        if (Input.GetKey(KeyCode.D) && Time.time > nextFire)
+        if (Input.GetKey("D") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Fire(fireSide.RIGHT, playerScript.shipDirectionState);
+            Fire(WeaponSide.RIGHT, playerData.shipDirectionState);
         }
     }
 
+    void Fire(WeaponSide side, ShipDirection direction)
+    {
+        Vector3 offset = new Vector3(0.0f, 0.0f, 0.0f);
+        Vector2 velocity;
+        GameObject projectile = Instantiate(projectilePrefab, playerTransform.position, Quaternion.identity);
+        Rigidbody2D body = projectile.GetComponent<Rigidbody2D>();
+        body.gravityScale = 0.0f;
+        switch (direction)
+        {
+            case ShipDirection.RIGHT:
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(0.0f, 1.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(0.0f, -1.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.UPRIGHT:
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(-1.0f, 1.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(1.0f, -1.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.UP:
+                body.gravityScale = 1.0f;
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(-1.0f, 0.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(1.0f, 0.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.UPLEFT:
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(-1.0f, -1.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(1.0f, 1.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.LEFT:
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(0.0f, -1.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(0.0f, 1.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.DOWNLEFT:
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(1.0f, -1.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(-1.0f, 1.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.DOWN:
+                body.gravityScale = 1.0f;
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(1.0f, 0.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(-1.0f, 0.0f, 0.0f);
+                        break;
+                }
+                break;
+            case ShipDirection.DOWNRIGHT:
+                switch (side)
+                {
+                    case WeaponSide.LEFT:
+                        offset = new Vector3(1.0f, 1.0f, 0.0f);
+                        break;
+                    case WeaponSide.RIGHT:
+                        offset = new Vector3(-1.0f, -1.0f, 0.0f);
+                        break;
+                }
+                break;
+        }
+        offset.Normalize();
+        velocity = offset;
+        offset *= 0.25f;
+        velocity *= speed;
+        projectile.transform.position += offset;
+        body.velocity = velocity + playerData.Ship.velocity;
+    }
+
     // FIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-    void Fire(fireSide fireSide, Player.ShipDirection shipDirectionState)
+    /*void Fire(fireSide fireSide, Player.ShipDirection shipDirectionState)
     {
         Vector2 offset = new Vector2(0.0f, 0.0f);
         // Create the Projectile from the Bullet Prefab
@@ -192,5 +302,5 @@ public class Weapon : MonoBehaviour
 
         // Destroy the bullet based on projectile life span
         Destroy(projectile, projectileLifeSpan);        
-    }
+    }*/
 }

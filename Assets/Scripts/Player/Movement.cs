@@ -4,7 +4,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Player : MonoBehaviour
+
+public enum ShipDirection
+{
+    RIGHT, UPRIGHT, UP, UPLEFT, LEFT, DOWNLEFT, DOWN, DOWNRIGHT
+}
+
+// Tile types
+public enum TileType
+{
+    WATER,
+    SAND,
+    GRASS,
+    PRAIRIE,
+    ROCK,
+    SNOW,
+    SHORE,
+    SHADOW,
+    EMPTY
+}
+
+public enum Weapons
+{
+    WEAPON_SLOT_ONE,
+    WEAPON_SLOT_TWO
+}
+
+public class Movement : MonoBehaviour
 {
 
     // Player data
@@ -12,10 +38,7 @@ public class Player : MonoBehaviour
     public float speed;
     public Rigidbody2D Ship;
     Animator animator;
-    public enum ShipDirection
-    {
-        RIGHT, UPRIGHT, UP, UPLEFT, LEFT, DOWNLEFT, DOWN, DOWNRIGHT
-    };
+
     public ShipDirection shipDirectionState;
 
     // World data
@@ -23,29 +46,13 @@ public class Player : MonoBehaviour
     public int dockingDistance;
     float tileWidth;
 
-    // Tile types
-    enum TileType
-    {
-        WATER,
-        SAND,
-        GRASS,
-        PRAIRIE,
-        ROCK,
-        SNOW,
-        SHORE,
-        SHADOW,
-        EMPTY
-    }
+
 
     // Menu
     GameObject PortButton;
 
     // Weapon State
-    public enum Weapons
-    {
-        WEAPON_SLOT_ONE,
-        WEAPON_SLOT_TWO
-    }
+
     public Weapons activeWeapon;
 
     public string weaponSlotOneName;
